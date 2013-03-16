@@ -1,0 +1,13 @@
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\bin\Debug\ChartTest.exe.config
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\bin\Debug\ChartTest.exe
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\bin\Debug\ChartTest.pdb
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest.csprojResolveAssemblyReference.cache
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\MainWindow.baml
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\MainWindow.g.cs
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\App.g.cs
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest_MarkupCompile.cache
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest.g.resources
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest.Properties.Resources.resources
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest.csproj.GenerateResource.Cache
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest.exe
+C:\Users\Gustavo\AppData\Local\Temporary Projects\ChartTest\obj\Debug\ChartTest.pdb
