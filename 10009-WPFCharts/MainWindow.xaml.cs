@@ -20,7 +20,7 @@ namespace ChartTest
 
         #region Fields
 
-        public IEnumerable ItemsSource { get; set; }
+        public IEnumerable<DataPoint> ItemsSource { get; set; }
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace ChartTest
             InitializeComponent();
 
             GenerateData();
-            //DrawRectangle();
+            DrawRectangle();
         }
 
         #endregion
@@ -62,17 +62,20 @@ namespace ChartTest
         public void DrawRectangle()
         {
 
-            //myGrid.Children.Add(rect);
+            myGrid.Children.Add(GenerateRectangle());
 
         }
 
-
+        /// <summary>
+        /// Generate Rectangle with values
+        /// </summary>
+        /// <returns>Drawed Rectangle</returns>
         private Rectangle GenerateRectangle()
         {
             Rectangle rect = new Rectangle();
-
-            rect.Height = 300;
-            rect.Width = 100;
+            double width = myGrid.Width;
+            rect.Height = GetActualHeightParentControl() / 1;
+            rect.Width = GetActualWidthParentContent() / 4;
             rect.Fill = new SolidColorBrush(Colors.Black);
             rect.ToolTip = "Estou aqui!";
 
@@ -82,17 +85,46 @@ namespace ChartTest
             return rect;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>DataPoint item</returns>
         public DataPoint GenerateDataPoint()
         {
 
-            DataPoint point = new DataPoint();
+            DataPoint dataPoint = new DataPoint();
 
 
-
-            return point;
+            return dataPoint;
 
         }
+
+        /// <summary>
+        /// Get Actual Width from container component
+        /// </summary>
+        /// <returns>Double Value</returns>
+        public Double GetActualWidthParentContent()
+        {
+            return this.myGrid.ActualWidth;
+        }
+
+        /// <summary>
+        /// Get Actual Height from container component
+        /// </summary>
+        /// <returns>Double Value</returns>
+        public Double GetActualHeightParentControl()
+        {
+            return this.myGrid.ActualHeight;
+        }
+
+        public void CheckContainerLimits()
+        {
+            if (this.myGrid.Width == double.NaN)
+            {
+
+            }
+        }
+
 
         #endregion
 
