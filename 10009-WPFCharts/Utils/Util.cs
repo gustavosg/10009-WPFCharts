@@ -17,12 +17,8 @@
 
 #region References
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 #endregion
@@ -30,25 +26,12 @@ using System.Windows.Media;
 
 namespace ChartTest.Utils
 {
-    public class Util
+    public class Util : Singleton<Util>
     {
         #region Fields
 
         #endregion
 
-        #region Constructor
-
-        public Util()
-        {
-
-        }
-
-        ~Util()
-        {
-
-        }
-
-        #endregion
 
         #region Methods
 
@@ -58,9 +41,10 @@ namespace ChartTest.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="control"></param>
         /// <returns></returns>
-        public static IEnumerable<T> FindAllChildren<T>(DependencyObject control) where T : DependencyObject
+        public IEnumerable<T> FindAllChildren<T>(DependencyObject control) where T : DependencyObject
         {
-            if (control != null){
+            if (control != null)
+            {
                 for (int i = 0; i < VisualTreeHelper.GetChildrenCount(control); i++)
                 {
                     DependencyObject obj = VisualTreeHelper.GetChild(control, i);
@@ -73,11 +57,12 @@ namespace ChartTest.Utils
                     foreach (T childOfChild in FindAllChildren<T>(obj))
                     {
                         yield return childOfChild;
-                        
+
                     }
                 }
             }
         }
+
 
         #endregion
     }

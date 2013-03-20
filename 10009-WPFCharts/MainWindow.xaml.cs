@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
+using ChartTest.Utils;
+
 #endregion
 
 namespace ChartTest
@@ -105,7 +107,10 @@ namespace ChartTest
         /// <returns>Double Value</returns>
         public Double GetActualWidthParentContent()
         {
-            return this.myGrid.ActualWidth;
+            if (this.myGrid.ActualWidth == double.NaN || this.myGrid.ActualWidth == 0.0)
+                return this.Width;
+            else
+                return System.Windows.SystemParameters.PrimaryScreenWidth;
         }
 
         /// <summary>
@@ -114,10 +119,13 @@ namespace ChartTest
         /// <returns>Double Value</returns>
         public Double GetActualHeightParentControl()
         {
-            return this.myGrid.ActualHeight;
+            if (this.myGrid.ActualHeight == double.NaN || this.myGrid.ActualHeight == 0.0)
+                return this.Height;
+            else
+                return System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
-        public void CheckContainerLimits()
+        public void DrawObject(Control c)
         {
             if (this.myGrid.Width == double.NaN)
             {
@@ -125,6 +133,12 @@ namespace ChartTest
             }
         }
 
+        private Object GetParent(Control obj) 
+        {
+            return obj.Parent;
+        }
+
+        // TODO Gustavo: Criar método que pesquisa todos os objetos pai
 
         #endregion
 
