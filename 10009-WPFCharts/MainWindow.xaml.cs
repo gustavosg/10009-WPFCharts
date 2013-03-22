@@ -78,9 +78,9 @@ namespace ChartTest
             double width = myGrid.Width;
             rect.Height = GetActualHeightParentControl() / 1;
             rect.Width = GetActualWidthParentContent() / 4;
-            rect.Fill = new SolidColorBrush(Colors.Black);
+            rect.Fill = Colorize.GetSingleton().GenerateColor();
             rect.ToolTip = "Estou aqui!";
-
+            
             rect.SetValue(Grid.RowProperty, 0);
             rect.SetValue(Grid.ColumnProperty, 0);
 
@@ -119,10 +119,11 @@ namespace ChartTest
         /// <returns>Double Value</returns>
         public Double GetActualHeightParentControl()
         {
-            if (this.myGrid.ActualHeight == double.NaN || this.myGrid.ActualHeight == 0.0)
-                return this.Height;
-            else
-                return System.Windows.SystemParameters.PrimaryScreenHeight;
+            //if (this.myGrid.ActualHeight == double.NaN || this.myGrid.ActualHeight == 0.0)
+            //    return this.Height;
+            //else
+                return (this.myGrid.Parent as Control).Height;
+                //return System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
         public void DrawObject(Control c)
