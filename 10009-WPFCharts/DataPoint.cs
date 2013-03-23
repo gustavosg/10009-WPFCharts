@@ -26,6 +26,7 @@
 #region References
 
 using System;
+using System.Windows.Media;
 
 #endregion
 
@@ -33,9 +34,9 @@ namespace ChartTest
 {
     public class DataPoint
     {
-
         public String IndependentValue { get; set; }
         public Double DependentValue { get; set; }
         public String ToolTip { get; set; }
+        public SolidColorBrush Color { get; set; }
     }
 }

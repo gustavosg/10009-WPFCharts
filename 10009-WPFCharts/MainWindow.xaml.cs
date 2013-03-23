@@ -1,13 +1,30 @@
-﻿#region References
+﻿// --------------------------------------------------------------------------------------
+// 
+// 
+// --------------------------------------------------------------------------------------
+// 
+// 
+// --------------------------------------------------------------------------------------
+// Autor: Gustavo Souza Gonçalves
+// Data: 15/03/2013
+// --------------------------------------------------------------------------------------
+// Versão:
+// 
+// --------------------------------------------------------------------------------------
+// Revisão:
+// 
+// --------------------------------------------------------------------------------------
+
+#region References
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
 using ChartTest.Utils;
 
 #endregion
@@ -32,14 +49,17 @@ namespace ChartTest
         {
             InitializeComponent();
 
-            GenerateData();
-            DrawRectangle();
+            AddRectanglesToGrid();
         }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Generates DataPoints with random values
+        /// </summary>
+        /// <returns>List of DataPoint</returns>
         public IList<DataPoint> GenerateData()
         {
             IList<DataPoint> dataPoints = new List<DataPoint>();
@@ -51,7 +71,7 @@ namespace ChartTest
                 DataPoint pointItem = new DataPoint()
                 {
                     IndependentValue = "Title " + i,
-                    DependentValue = i,
+                    DependentValue = i * 100,
                     ToolTip = "Title " + i
                 };
                 dataPoints.Add(pointItem);
@@ -61,10 +81,16 @@ namespace ChartTest
 
         }
 
-        public void DrawRectangle()
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddRectanglesToGrid()
         {
-
-            myGrid.Children.Add(GenerateRectangle());
+            foreach (var item in GenerateRectangle())
+            {
+                
+                myGrid.Children.Add(item);
+            }
 
         }
 
@@ -72,19 +98,42 @@ namespace ChartTest
         /// Generate Rectangle with values
         /// </summary>
         /// <returns>Drawed Rectangle</returns>
-        private Rectangle GenerateRectangle()
+        private IList<Rectangle> GenerateRectangle()
         {
-            Rectangle rect = new Rectangle();
-            double width = myGrid.Width;
-            rect.Height = GetActualHeightParentControl() / 1;
-            rect.Width = GetActualWidthParentContent() / 4;
-            rect.Fill = Colorize.GetSingleton().GenerateColor();
-            rect.ToolTip = "Estou aqui!";
-            
-            rect.SetValue(Grid.RowProperty, 0);
-            rect.SetValue(Grid.ColumnProperty, 0);
+            ItemsSource = GenerateData();
+            IList<Rectangle> rectangleList = new List<Rectangle>();
+            rectangleList.Clear();
 
-            return rect;
+            foreach (var item in ItemsSource)
+            {
+                Rectangle rect = new Rectangle();
+
+                rect.Height = item.DependentValue;
+                rect.Width = (ItemsSource as IList).Count * 10;
+                rect.Fill = Colorize.GetSingleton().GenerateColor();
+                rect.ToolTip = item.IndependentValue;
+
+                rect.SetValue(Grid.RowProperty, 0);
+                rect.SetValue(Grid.ColumnProperty, 0);
+                
+                    
+                rect.StrokeThickness = 2.0;
+
+                rectangleList.Add(rect);
+            }
+
+
+            //Rectangle rect = new Rectangle();
+            //double width = myGrid.Width;
+            //rect.Height = GetActualHeightParentControl() / 1;
+            //rect.Width = GetActualWidthParentContent() / 4;
+            //rect.Fill = Colorize.GetSingleton().GenerateColor();
+            //rect.ToolTip = "Estou aqui!";
+            
+            //rect.SetValue(Grid.RowProperty, 0);
+            //rect.SetValue(Grid.ColumnProperty, 0);
+
+            return rectangleList;
         }
 
         /// <summary>

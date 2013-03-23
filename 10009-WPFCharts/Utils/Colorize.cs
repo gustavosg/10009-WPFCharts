@@ -1,4 +1,6 @@
-﻿#region References
+﻿
+
+#region References
 
 using System;
 using System.Windows.Media;
@@ -16,15 +18,14 @@ namespace ChartTest.Utils
         #endregion
 
         #region Methods
-
-        private Color GetRandomColor()
-        {
-            return Color.FromRgb(Convert.ToByte(rand.Next(0, 255)), Convert.ToByte(rand.Next(0, 255)), Convert.ToByte(rand.Next(0, 255)));
-        }
-
+        
+        /// <summary>
+        /// Generates a RGB Color
+        /// </summary>
+        /// <returns>New SolidColorBrush object</returns>
         public SolidColorBrush GenerateColor()
         {
-            return new SolidColorBrush(GetRandomColor());
+            return new SolidColorBrush(Color.FromRgb(Convert.ToByte(rand.Next(0, 255)), Convert.ToByte(rand.Next(0, 255)), Convert.ToByte(rand.Next(0, 255))));
         }
 
         #endregion
