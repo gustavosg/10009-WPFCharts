@@ -66,25 +66,25 @@ namespace ChartTest
 
             Random num = new Random();
 
-            //for (int i = 1; i < num.Next(300); i++)
-            //{
-            //    DataPoint pointItem = new DataPoint()
-            //    {
-            //        IndependentValue = "Title " + i,
-            //        DependentValue = i * 100,
-            //        ToolTip = "Title " + i
-            //    };
-            //    dataPoints.Add(pointItem);
-
-            //}
-
-            DataPoint pointItem = new DataPoint()
+            for (int i = 1; i < num.Next(300); i++)
             {
-                IndependentValue = "Title 1",
-                DependentValue = 100,
-                ToolTip = "Title 1"
-            };
-            dataPoints.Add(pointItem);
+                DataPoint pointItem = new DataPoint()
+                {
+                    IndependentValue = "Title " + i,
+                    DependentValue = i * 100,
+                    ToolTip = "Title " + i
+                };
+                dataPoints.Add(pointItem);
+
+            }
+
+            //DataPoint pointItem = new DataPoint()
+            //{
+            //    IndependentValue = "Title 1",
+            //    DependentValue = 100,
+            //    ToolTip = "Title 1"
+            //};
+            //dataPoints.Add(pointItem);
             return dataPoints;
 
         }
@@ -99,6 +99,8 @@ namespace ChartTest
 
             if (myGrid.ActualWidth == double.NaN)
                 myGrid.Width = (myGrid.Parent as Window).ActualWidth;
+
+            
 
             foreach (var item in GenerateRectangle())
             {
@@ -118,12 +120,32 @@ namespace ChartTest
             IList<Rectangle> rectangleList = new List<Rectangle>();
             rectangleList.Clear();
 
+            //foreach (var item in ItemsSource)
+            //{
+            //    Rectangle rect = new Rectangle();
+
+            //    rect.Height = item.DependentValue;
+            //    rect.Width = (ItemsSource as IList).Count * 10;
+            //    rect.Fill = Colorize.GetSingleton().GenerateColor();
+            //    rect.ToolTip = item.IndependentValue;
+
+            //    rect.SetValue(Grid.RowProperty, 0);
+            //    rect.SetValue(Grid.ColumnProperty, 0);
+
+            //    rect.StrokeThickness = 2.0;
+
+            //    // this set location of component in screen
+            //    rect.Margin = new Thickness(0, 0, 0, 0);
+            //    rectangleList.Add(rect);
+            //}
+
+
             foreach (var item in ItemsSource)
             {
                 Rectangle rect = new Rectangle();
 
                 rect.Height = item.DependentValue;
-                rect.Width = (ItemsSource as IList).Count * 10;
+                rect.Width = (ItemsSource as IList).Count * 2;
                 rect.Fill = Colorize.GetSingleton().GenerateColor();
                 rect.ToolTip = item.IndependentValue;
 
@@ -133,20 +155,11 @@ namespace ChartTest
                 rect.StrokeThickness = 2.0;
 
                 // this set location of component in screen
-                rect.Margin = new Thickness(0, 0, 0, 0);
+                rect.Margin = new Thickness(item.DependentValue * 2, 0, 0, 0);
+
+                rect.Stroke = new SolidColorBrush(Colors.Black);
                 rectangleList.Add(rect);
             }
-
-
-            //Rectangle rect = new Rectangle();
-            //double width = myGrid.Width;
-            //rect.Height = GetActualHeightParentControl() / 1;
-            //rect.Width = GetActualWidthParentContent() / 4;
-            //rect.Fill = Colorize.GetSingleton().GenerateColor();
-            //rect.ToolTip = "Estou aqui!";
-
-            //rect.SetValue(Grid.RowProperty, 0);
-            //rect.SetValue(Grid.ColumnProperty, 0);
 
             return rectangleList;
         }
