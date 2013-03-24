@@ -77,14 +77,6 @@ namespace ChartTest
                 dataPoints.Add(pointItem);
 
             }
-
-            //DataPoint pointItem = new DataPoint()
-            //{
-            //    IndependentValue = "Title 1",
-            //    DependentValue = 100,
-            //    ToolTip = "Title 1"
-            //};
-            //dataPoints.Add(pointItem);
             return dataPoints;
 
         }
@@ -100,12 +92,17 @@ namespace ChartTest
             if (myGrid.ActualWidth == double.NaN)
                 myGrid.Width = (myGrid.Parent as Window).ActualWidth;
 
-            
-
-            foreach (var item in GenerateRectangle())
+            foreach (Rectangle item in GenerateRectangle())
             {
 
-                myGrid.Children.Add(item);
+                Canvas canvasRect = new Canvas();
+                canvasRect.Width = item.Width;
+                canvasRect.Height = item.Height;
+
+                Canvas.SetLeft(item, -50);
+                canvasRect.Children.Add(item);
+                myGrid.Children.Add(canvasRect);
+
             }
 
         }
@@ -120,32 +117,21 @@ namespace ChartTest
             IList<Rectangle> rectangleList = new List<Rectangle>();
             rectangleList.Clear();
 
-            //foreach (var item in ItemsSource)
-            //{
-            //    Rectangle rect = new Rectangle();
+            Int32 countItemsSource = (ItemsSource as IList).Count;
 
-            //    rect.Height = item.DependentValue;
-            //    rect.Width = (ItemsSource as IList).Count * 10;
-            //    rect.Fill = Colorize.GetSingleton().GenerateColor();
-            //    rect.ToolTip = item.IndependentValue;
+            Double widthComponent = GetActualWidthParentContent();
 
-            //    rect.SetValue(Grid.RowProperty, 0);
-            //    rect.SetValue(Grid.ColumnProperty, 0);
-
-            //    rect.StrokeThickness = 2.0;
-
-            //    // this set location of component in screen
-            //    rect.Margin = new Thickness(0, 0, 0, 0);
-            //    rectangleList.Add(rect);
-            //}
-
+            // ToDo Gustavo:
+            // Com isto consigo fazer um espelho negativo do valor width
+            // tentar atribuir o espelho para os componentes, desenhar no angulo X invertido
+            Double angleXNegative = -widthComponent;
 
             foreach (var item in ItemsSource)
             {
                 Rectangle rect = new Rectangle();
 
                 rect.Height = item.DependentValue;
-                rect.Width = (ItemsSource as IList).Count * 2;
+                rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
                 rect.Fill = Colorize.GetSingleton().GenerateColor();
                 rect.ToolTip = item.IndependentValue;
 
@@ -158,24 +144,11 @@ namespace ChartTest
                 rect.Margin = new Thickness(item.DependentValue * 2, 0, 0, 0);
 
                 rect.Stroke = new SolidColorBrush(Colors.Black);
+
                 rectangleList.Add(rect);
             }
 
             return rectangleList;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>DataPoint item</returns>
-        public DataPoint GenerateDataPoint()
-        {
-
-            DataPoint dataPoint = new DataPoint();
-
-
-            return dataPoint;
-
         }
 
         /// <summary>
@@ -203,6 +176,17 @@ namespace ChartTest
             //return System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="countItemsSource"></param>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        public Double CalculateWidthOfRectangle(Int32 countItemsSource, Double width)
+        {
+            return width / countItemsSource - (countItemsSource / 10);
+        }
+
         public void DrawObject(Control c)
         {
             if (this.myGrid.Width == double.NaN)
@@ -216,9 +200,6 @@ namespace ChartTest
             return obj.Parent;
         }
 
-        // TODO Gustavo: Criar método que pesquisa todos os objetos pai
-
         #endregion
-
     }
 }
