@@ -66,17 +66,25 @@ namespace ChartTest
 
             Random num = new Random();
 
-            for (int i = 1; i < num.Next(300); i++)
-            {
-                DataPoint pointItem = new DataPoint()
-                {
-                    IndependentValue = "Title " + i,
-                    DependentValue = i * 100,
-                    ToolTip = "Title " + i
-                };
-                dataPoints.Add(pointItem);
+            //for (int i = 1; i < num.Next(300); i++)
+            //{
+            //    DataPoint pointItem = new DataPoint()
+            //    {
+            //        IndependentValue = "Title " + i,
+            //        DependentValue = i * 100,
+            //        ToolTip = "Title " + i
+            //    };
+            //    dataPoints.Add(pointItem);
 
-            }
+            //}
+
+            DataPoint pointItem = new DataPoint()
+            {
+                IndependentValue = "Title 1",
+                DependentValue = 100,
+                ToolTip = "Title 1"
+            };
+            dataPoints.Add(pointItem);
             return dataPoints;
 
         }
@@ -86,9 +94,15 @@ namespace ChartTest
         /// </summary>
         public void AddRectanglesToGrid()
         {
+            if (myGrid.ActualHeight == double.NaN)
+                myGrid.Height = (myGrid.Parent as Window).ActualHeight;
+
+            if (myGrid.ActualWidth == double.NaN)
+                myGrid.Width = (myGrid.Parent as Window).ActualWidth;
+
             foreach (var item in GenerateRectangle())
             {
-                
+
                 myGrid.Children.Add(item);
             }
 
@@ -115,10 +129,11 @@ namespace ChartTest
 
                 rect.SetValue(Grid.RowProperty, 0);
                 rect.SetValue(Grid.ColumnProperty, 0);
-                
-                    
+
                 rect.StrokeThickness = 2.0;
 
+                // this set location of component in screen
+                rect.Margin = new Thickness(0, 0, 0, 0);
                 rectangleList.Add(rect);
             }
 
@@ -129,7 +144,7 @@ namespace ChartTest
             //rect.Width = GetActualWidthParentContent() / 4;
             //rect.Fill = Colorize.GetSingleton().GenerateColor();
             //rect.ToolTip = "Estou aqui!";
-            
+
             //rect.SetValue(Grid.RowProperty, 0);
             //rect.SetValue(Grid.ColumnProperty, 0);
 
@@ -171,8 +186,8 @@ namespace ChartTest
             //if (this.myGrid.ActualHeight == double.NaN || this.myGrid.ActualHeight == 0.0)
             //    return this.Height;
             //else
-                return (this.myGrid.Parent as Control).Height;
-                //return System.Windows.SystemParameters.PrimaryScreenHeight;
+            return (this.myGrid.Parent as Control).Height;
+            //return System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
         public void DrawObject(Control c)
@@ -183,7 +198,7 @@ namespace ChartTest
             }
         }
 
-        private Object GetParent(Control obj) 
+        private Object GetParent(Control obj)
         {
             return obj.Parent;
         }
