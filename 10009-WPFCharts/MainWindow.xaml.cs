@@ -66,7 +66,7 @@ namespace ChartTest
 
             Random num = new Random();
 
-            for (int i = 1; i < num.Next(300); i++)
+            for (int i = 1; i < num.Next(50); i++)
             {
                 DataPoint pointItem = new DataPoint()
                 {
@@ -100,9 +100,10 @@ namespace ChartTest
                 canvasRect.Height = item.Height;
 
                 Canvas.SetLeft(item, -50);
+
+                item.VerticalAlignment = VerticalAlignment.Bottom;
                 canvasRect.Children.Add(item);
                 myGrid.Children.Add(canvasRect);
-
             }
 
         }
@@ -121,10 +122,11 @@ namespace ChartTest
 
             Double widthComponent = GetActualWidthParentContent();
 
+            Double widthPosition = widthComponent / countItemsSource;
             // ToDo Gustavo:
             // Com isto consigo fazer um espelho negativo do valor width
             // tentar atribuir o espelho para os componentes, desenhar no angulo X invertido
-            Double angleXNegative = -widthComponent;
+            Double positionX = -widthComponent;
 
             foreach (var item in ItemsSource)
             {
@@ -141,7 +143,11 @@ namespace ChartTest
                 rect.StrokeThickness = 2.0;
 
                 // this set location of component in screen
-                rect.Margin = new Thickness(item.DependentValue * 2, 0, 0, 0);
+                rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
+
+                widthPosition += widthComponent / countItemsSource;
+
+                rect.VerticalAlignment = VerticalAlignment.Bottom;
 
                 rect.Stroke = new SolidColorBrush(Colors.Black);
 
