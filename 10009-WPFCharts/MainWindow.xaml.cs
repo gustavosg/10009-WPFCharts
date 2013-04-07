@@ -94,16 +94,9 @@ namespace ChartTest
 
             foreach (Rectangle item in GenerateRectangle())
             {
-
-                Canvas canvasRect = new Canvas();
-                canvasRect.Width = item.Width;
-                canvasRect.Height = item.Height;
-
-                Canvas.SetLeft(item, -50);
-
                 item.VerticalAlignment = VerticalAlignment.Bottom;
-                canvasRect.Children.Add(item);
-                myGrid.Children.Add(canvasRect);
+
+                myGrid.Children.Add(item);
             }
 
         }
@@ -123,33 +116,33 @@ namespace ChartTest
             Double widthComponent = GetActualWidthParentContent();
 
             Double widthPosition = widthComponent / countItemsSource;
-            // ToDo Gustavo:
-            // Com isto consigo fazer um espelho negativo do valor width
-            // tentar atribuir o espelho para os componentes, desenhar no angulo X invertido
+
             Double positionX = -widthComponent;
 
             foreach (var item in ItemsSource)
             {
                 Rectangle rect = new Rectangle();
 
-                rect.Height = item.DependentValue;
+                //rect.Height = item.DependentValue ;
+                rect.Height = item.DependentValue / (this.Height / 50);
+
                 rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
+                //rect.Width = 10;
                 rect.Fill = Colorize.GetSingleton().GenerateColor();
-                rect.ToolTip = item.IndependentValue;
+                rect.ToolTip = item.IndependentValue + " (" + item.DependentValue + ") ";
 
-                rect.SetValue(Grid.RowProperty, 0);
-                rect.SetValue(Grid.ColumnProperty, 0);
-
-                rect.StrokeThickness = 2.0;
+                // Configures border/BorderColor of rectangle
+                rect.StrokeThickness = 1.5;
+                rect.Stroke = new SolidColorBrush(Colors.Black);
 
                 // this set location of component in screen
                 rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
 
+                // position of component in grid
                 widthPosition += widthComponent / countItemsSource;
 
+                // Sets Vertical Alignment of rectangle to bottom
                 rect.VerticalAlignment = VerticalAlignment.Bottom;
-
-                rect.Stroke = new SolidColorBrush(Colors.Black);
 
                 rectangleList.Add(rect);
             }
@@ -190,20 +183,8 @@ namespace ChartTest
         /// <returns></returns>
         public Double CalculateWidthOfRectangle(Int32 countItemsSource, Double width)
         {
-            return width / countItemsSource - (countItemsSource / 10);
-        }
-
-        public void DrawObject(Control c)
-        {
-            if (this.myGrid.Width == double.NaN)
-            {
-
-            }
-        }
-
-        private Object GetParent(Control obj)
-        {
-            return obj.Parent;
+            //return width / countItemsSource - (countItemsSource / 10) ;
+            return width / countItemsSource - (width / 10);
         }
 
         #endregion
