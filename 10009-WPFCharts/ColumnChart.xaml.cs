@@ -1,7 +1,4 @@
 ﻿// --------------------------------------------------------------------------------------
-// 
-// 
-// --------------------------------------------------------------------------------------
 // Descrição:
 // 
 // --------------------------------------------------------------------------------------
@@ -15,14 +12,14 @@
 // 
 // --------------------------------------------------------------------------------------
 
-#region References
+
+#region references
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ChartTest.Utils;
@@ -32,20 +29,19 @@ using ChartTest.Utils;
 namespace ChartTest
 {
     /// <summary>
-    /// Interação lógica para MainWindow.xam
+    /// Interação lógica para ColumnChart.xam
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ColumnChart : UserControl
     {
-
         #region Fields
 
         public IEnumerable<DataPoint> ItemsSource { get; set; }
 
         #endregion
 
-        #region Constructors
+        #region Constructor
 
-        public MainWindow()
+        public ColumnChart()
         {
             InitializeComponent();
 

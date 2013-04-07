@@ -11,3 +11,5 @@ D:\Projetos\10009-WPFCharts\10009-WPFCharts\bin\Debug\10009-WPFCharts.pdb
 D:\Projetos\10009-WPFCharts\10009-WPFCharts\obj\Debug\10009-WPFCharts.exe
 D:\Projetos\10009-WPFCharts\10009-WPFCharts\obj\Debug\10009-WPFCharts.pdb
 D:\Projetos\10009-WPFCharts\10009-WPFCharts\obj\Debug\10009-WPFCharts.csprojResolveAssemblyReference.cache
+D:\Projetos\10009-WPFCharts\10009-WPFCharts\obj\Debug\ColumnChart.baml
+D:\Projetos\10009-WPFCharts\10009-WPFCharts\obj\Debug\ColumnChart.g.cs
