@@ -83,7 +83,7 @@ namespace ChartTest
         public IList<UIElement> AddRectanglesToGrid()
         {
             IList<UIElement> children = new List<UIElement>();
-            
+
             if (myGrid.ActualHeight == double.NaN)
                 myGrid.Height = (myGrid.Parent as Window).ActualHeight;
 
@@ -126,10 +126,10 @@ namespace ChartTest
 
                 //rect.Height = item.DependentValue ;
                 //rect.Height = item.DependentValue / (myGrid.Height / 50);
-                rect.Height = CalculateHeightOfRectangle(countItemsSource, GetActualHeightParentControl(), item.DependentValue);
+                rect.Height = CalculateHeightOfRectangle(GetActualHeightParentControl(), item.DependentValue);
 
                 rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
-                //rect.Width = 10;
+                
                 rect.Fill = Colorize.GetSingleton().GenerateColor();
                 rect.ToolTip = item.IndependentValue + " (" + item.DependentValue + ") ";
 
@@ -211,11 +211,9 @@ namespace ChartTest
         /// <param name="height"></param>
         /// <param name="dependentValue"></param>
         /// <returns></returns>
-        public Double CalculateHeightOfRectangle(Int32 countItemsSource, Double height, Double dependentValue)
+        public Double CalculateHeightOfRectangle(Double height, Double dependentValue)
         {
-            //item.DependentValue / (myGrid.Height / 50)
             return dependentValue / (height / 50);
-            //return height / countItemsSource - (height / 10);
         }
 
         #endregion
