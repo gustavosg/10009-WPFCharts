@@ -45,7 +45,7 @@ namespace ChartTest
         {
             InitializeComponent();
 
-            AddRectanglesToGrid();
+            //AddRectanglesToGrid();
         }
 
         #endregion
@@ -80,8 +80,10 @@ namespace ChartTest
         /// <summary>
         /// 
         /// </summary>
-        public void AddRectanglesToGrid()
+        public IList<UIElement> AddRectanglesToGrid()
         {
+            IList<UIElement> children = new List<UIElement>();
+            
             if (myGrid.ActualHeight == double.NaN)
                 myGrid.Height = (myGrid.Parent as Window).ActualHeight;
 
@@ -92,8 +94,13 @@ namespace ChartTest
             {
                 item.VerticalAlignment = VerticalAlignment.Bottom;
 
-                myGrid.Children.Add(item);
+                //myGrid.Children.Add(item);
+
+                children.Add(item);
             }
+
+            return children;
+            //return myGrid;
         }
         /// <summary>
         /// Generate Rectangle with values
@@ -118,7 +125,8 @@ namespace ChartTest
                 Rectangle rect = new Rectangle();
 
                 //rect.Height = item.DependentValue ;
-                rect.Height = item.DependentValue / (this.Height / 50);
+                //rect.Height = item.DependentValue / (myGrid.Height / 50);
+                rect.Height = CalculateHeightOfRectangle(countItemsSource, GetActualHeightParentControl(), item.DependentValue);
 
                 rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
                 //rect.Width = 10;
@@ -151,7 +159,15 @@ namespace ChartTest
         public Double GetActualWidthParentContent()
         {
             if (this.myGrid.ActualWidth == double.NaN || this.myGrid.ActualWidth == 0.0)
-                return this.Width;
+            {
+                Double width = 0.0;
+                if (myGrid.Width.Equals(Double.NaN))
+                    width = 125.0;
+                else
+                    width = myGrid.Width;
+
+                return width;
+            }
             else
                 return System.Windows.SystemParameters.PrimaryScreenWidth;
         }
@@ -162,11 +178,18 @@ namespace ChartTest
         /// <returns>Double Value</returns>
         public Double GetActualHeightParentControl()
         {
-            //if (this.myGrid.ActualHeight == double.NaN || this.myGrid.ActualHeight == 0.0)
-            //    return this.Height;
-            //else
-            return (this.myGrid.Parent as Control).Height;
-            //return System.Windows.SystemParameters.PrimaryScreenHeight;
+            if (this.myGrid.ActualHeight == double.NaN || this.myGrid.ActualHeight == 0.0)
+            {
+                Double height = 0.0;
+                if (myGrid.Height.Equals(Double.NaN))
+                    height = 525.0;
+                else
+                    height = myGrid.Height;
+
+                return height;
+            }
+            else
+                return System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
         /// <summary>
@@ -179,6 +202,20 @@ namespace ChartTest
         {
             //return width / countItemsSource - (countItemsSource / 10) ;
             return width / countItemsSource - (width / 10);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="countItemsSource"></param>
+        /// <param name="height"></param>
+        /// <param name="dependentValue"></param>
+        /// <returns></returns>
+        public Double CalculateHeightOfRectangle(Int32 countItemsSource, Double height, Double dependentValue)
+        {
+            //item.DependentValue / (myGrid.Height / 50)
+            return dependentValue / (height / 50);
+            //return height / countItemsSource - (height / 10);
         }
 
         #endregion
