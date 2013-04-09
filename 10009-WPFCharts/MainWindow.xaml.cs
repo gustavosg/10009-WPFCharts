@@ -51,15 +51,9 @@ namespace ChartTest
 
             ColumnChart chart = new ColumnChart();
 
-            //myGrid.Children.Add(chart.AddRectanglesToGrid());
-
             foreach (var item in chart.AddRectanglesToGrid())
-            {
                 myGrid.Children.Add(item);
-                
-            }
-
-            //AddRectanglesToGrid();
+            
         }
 
         #endregion

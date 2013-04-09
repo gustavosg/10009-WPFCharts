@@ -94,21 +94,22 @@ namespace ChartTest
             {
                 item.VerticalAlignment = VerticalAlignment.Bottom;
 
-                //myGrid.Children.Add(item);
-
                 children.Add(item);
             }
 
             return children;
-            //return myGrid;
         }
+
         /// <summary>
         /// Generate Rectangle with values
         /// </summary>
         /// <returns>Drawed Rectangle</returns>
         private IList<Rectangle> GenerateRectangle()
         {
-            ItemsSource = GenerateData();
+            // Garante que ItemsSource nunca será nulo ou vazio
+            while (ItemsSource == null)
+                ItemsSource = GenerateData();
+
             IList<Rectangle> rectangleList = new List<Rectangle>();
             rectangleList.Clear();
 
@@ -129,7 +130,7 @@ namespace ChartTest
                 rect.Height = CalculateHeightOfRectangle(GetActualHeightParentControl(), item.DependentValue);
 
                 rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
-                
+
                 rect.Fill = Colorize.GetSingleton().GenerateColor();
                 rect.ToolTip = item.IndependentValue + " (" + item.DependentValue + ") ";
 
@@ -139,6 +140,10 @@ namespace ChartTest
 
                 // this set location of component in screen
                 rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
+
+
+
+                Canvas.SetLeft(rect, 50);
 
                 // position of component in grid
                 widthPosition += widthComponent / countItemsSource;
@@ -161,10 +166,12 @@ namespace ChartTest
             if (this.myGrid.ActualWidth == double.NaN || this.myGrid.ActualWidth == 0.0)
             {
                 Double width = 0.0;
-                if (myGrid.Width.Equals(Double.NaN))
-                    width = 125.0;
-                else
-                    width = myGrid.Width;
+                //if (myGrid.Width.Equals(Double.NaN))
+                //    width = this.Width;
+                //else
+                //    width = myGrid.Width;
+
+                width = 150.0;
 
                 return width;
             }
@@ -182,7 +189,7 @@ namespace ChartTest
             {
                 Double height = 0.0;
                 if (myGrid.Height.Equals(Double.NaN))
-                    height = 525.0;
+                    height = this.Height;
                 else
                     height = myGrid.Height;
 
@@ -198,10 +205,15 @@ namespace ChartTest
         /// <param name="countItemsSource"></param>
         /// <param name="width"></param>
         /// <returns></returns>
-        public Double CalculateWidthOfRectangle(Int32 countItemsSource, Double width)
+        public Double CalculateWidthOfRectangle(Int32 countItemsSource, Double widthComponent)
         {
-            //return width / countItemsSource - (countItemsSource / 10) ;
-            return width / countItemsSource - (width / 10);
+            Double minWidth = 30.0;
+            Double width = 0.0;
+            width = widthComponent / countItemsSource - (widthComponent / 10);
+            if (width < minWidth)
+                return minWidth;
+            else
+                return width;
         }
 
         /// <summary>
@@ -211,9 +223,18 @@ namespace ChartTest
         /// <param name="height"></param>
         /// <param name="dependentValue"></param>
         /// <returns></returns>
-        public Double CalculateHeightOfRectangle(Double height, Double dependentValue)
+        public Double CalculateHeightOfRectangle(Double heightComponent, Double dependentValue)
         {
-            return dependentValue / (height / 50);
+            Double height = 0.0;
+
+            if (this.Height.Equals(Double.NaN))
+                height = 640.0;
+            else
+                height = (this.Parent as Control).Height;
+
+            // ToDo Gustavo: Implementar lógica para controlar min/max de Height do component.
+
+            return  (heightComponent / height) * dependentValue;
         }
 
         #endregion
