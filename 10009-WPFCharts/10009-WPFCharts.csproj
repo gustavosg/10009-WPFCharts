@@ -57,6 +57,7 @@
       <DependentUpon>ColumnChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Colorize.cs" />
+    <Compile Include="Utils\EnumerableUtil.cs" />
     <Compile Include="Utils\Singleton.cs" />
     <Compile Include="Utils\Util.cs" />
     <Page Include="ColumnChart.xaml">

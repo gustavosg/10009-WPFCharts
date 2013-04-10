@@ -24,6 +24,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using ChartTest.Utils;
 
+
 #endregion
 
 namespace ChartTest
@@ -61,8 +62,12 @@ namespace ChartTest
             IList<DataPoint> dataPoints = new List<DataPoint>();
 
             Random num = new Random();
+            Int16 value = 0;
 
-            for (int i = 1; i < num.Next(50); i++)
+            while (value < 2)
+                value = Convert.ToInt16(num.Next(15));
+
+            for (int i = 1; i < value; i++)
             {
                 DataPoint pointItem = new DataPoint()
                 {
@@ -120,6 +125,8 @@ namespace ChartTest
             Double widthPosition = widthComponent / countItemsSource;
 
             Double positionX = -widthComponent;
+
+            Double minimum = ItemsSource.Min();
 
             foreach (var item in ItemsSource)
             {
@@ -207,7 +214,7 @@ namespace ChartTest
         /// <returns></returns>
         public Double CalculateWidthOfRectangle(Int32 countItemsSource, Double widthComponent)
         {
-            Double minWidth = 30.0;
+            Double minWidth = 50.0;
             Double width = 0.0;
             width = widthComponent / countItemsSource - (widthComponent / 10);
             if (width < minWidth)

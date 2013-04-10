@@ -53,6 +53,9 @@ namespace ChartTest
 
             foreach (var item in chart.AddRectanglesToGrid())
                 myGrid.Children.Add(item);
+
+            myGrid.HorizontalAlignment = HorizontalAlignment.Stretch;
+            myGrid.VerticalAlignment = VerticalAlignment.Stretch;
             
         }
 
