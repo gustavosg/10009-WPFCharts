@@ -49,13 +49,13 @@ namespace ChartTest
         {
             InitializeComponent();
 
-            ColumnChart chart = new ColumnChart();
+            //ColumnChart chart = new ColumnChart();
 
-            foreach (var item in chart.AddRectanglesToGrid())
-                myGrid.Children.Add(item);
+            //foreach (var item in chart.AddRectanglesToGrid())
+            //    myGrid.Children.Add(item);
 
-            myGrid.HorizontalAlignment = HorizontalAlignment.Stretch;
-            myGrid.VerticalAlignment = VerticalAlignment.Stretch;
+            //myGrid.HorizontalAlignment = HorizontalAlignment.Stretch;
+            //myGrid.VerticalAlignment = VerticalAlignment.Stretch;
             
         }
 

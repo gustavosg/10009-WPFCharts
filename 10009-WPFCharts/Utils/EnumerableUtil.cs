@@ -25,5 +25,22 @@ namespace ChartTest.Utils
             return minValue;
         }
 
+        public static Double Max(this IEnumerable ienumerable)
+        {
+            Double maxValue = Double.NaN;
+
+            foreach (DataPoint item in ienumerable)
+            {
+                if (maxValue.Equals(Double.NaN))
+                    maxValue = item.DependentValue;
+
+                if (maxValue < item.DependentValue)
+                    maxValue = item.DependentValue;
+            }
+
+            return maxValue;
+        }
+
+
     }
 }

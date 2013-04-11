@@ -46,7 +46,7 @@ namespace ChartTest
         {
             InitializeComponent();
 
-            //AddRectanglesToGrid();
+            AddRectanglesToGrid();
         }
 
         #endregion
@@ -65,9 +65,9 @@ namespace ChartTest
             Int16 value = 0;
 
             while (value < 2)
-                value = Convert.ToInt16(num.Next(15));
+                value = Convert.ToInt16(num.Next(8));
 
-            for (int i = 1; i < value; i++)
+            for (int i = 1; i <= value ; i++)
             {
                 DataPoint pointItem = new DataPoint()
                 {
@@ -99,7 +99,8 @@ namespace ChartTest
             {
                 item.VerticalAlignment = VerticalAlignment.Bottom;
 
-                children.Add(item);
+                myGrid.Children.Add(item);
+                //children.Add(item);
             }
 
             return children;
@@ -147,8 +148,6 @@ namespace ChartTest
 
                 // this set location of component in screen
                 rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
-
-
 
                 Canvas.SetLeft(rect, 50);
 
@@ -234,14 +233,19 @@ namespace ChartTest
         {
             Double height = 0.0;
 
-            if (this.Height.Equals(Double.NaN))
+            if (myGrid.Height.Equals(Double.NaN))
                 height = 640.0;
             else
-                height = (this.Parent as Control).Height;
+                height = myGrid.Height;
 
             // ToDo Gustavo: Implementar lógica para controlar min/max de Height do component.
 
-            return  (heightComponent / height) * dependentValue;
+            //  height / (((heightComponent / height) * dependentValue) * ((IList)ItemsSource).Count) 
+            Double multiplyier = height / ItemsSource.Max();
+
+            Double proportion = dependentValue * multiplyier;
+
+            return (proportion) - (proportion / 10);
         }
 
         #endregion
