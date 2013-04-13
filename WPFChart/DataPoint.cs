@@ -27,11 +27,11 @@
 
 using System;
 using System.Windows.Media;
-using ChartTest.Utils;
+using ChartLibrary.Utils;
 
 #endregion
 
-namespace ChartTest
+namespace ChartLibrary
 {
     public class DataPoint : Singleton<DataPoint>
     {

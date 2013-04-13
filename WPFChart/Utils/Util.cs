@@ -24,7 +24,7 @@ using System.Windows.Media;
 #endregion
 
 
-namespace ChartTest.Utils
+namespace ChartLibrary.Utils
 {
     public class Util : Singleton<Util>
     {

@@ -22,12 +22,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ChartTest.Utils;
-
+using ChartLibrary.Utils;
 
 #endregion
 
-namespace ChartTest
+namespace ChartLibrary
 {
     /// <summary>
     /// Interação lógica para ColumnChart.xam
@@ -36,7 +35,17 @@ namespace ChartTest
     {
         #region Fields
 
-        public IEnumerable<DataPoint> ItemsSource { get; set; }
+        private IEnumerable<DataPoint> itemsSource;
+        public IEnumerable<DataPoint> ItemsSource
+        {
+            get { return itemsSource; }
+            set
+            {
+                itemsSource = value;
+                if (value != null)
+                    AddRectanglesToGrid();
+            }
+        }
 
         #endregion
 
@@ -45,8 +54,6 @@ namespace ChartTest
         public ColumnChart()
         {
             InitializeComponent();
-
-            AddRectanglesToGrid();
         }
 
         #endregion
@@ -61,6 +68,19 @@ namespace ChartTest
         {
             IList<DataPoint> dataPoints = new List<DataPoint>();
 
+            if (ItemsSource != null)
+                foreach (DataPoint item in ItemsSource)
+                    dataPoints.Add(item);
+
+            return dataPoints;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IList<DataPoint> GenerateDataTest()
+        {
             //Random rand = new Random();
             //Int16 value = 0;
 
@@ -77,12 +97,7 @@ namespace ChartTest
             //    };
             //    dataPoints.Add(pointItem);
             //}
-
-            if (ItemsSource != null)
-                foreach (DataPoint item in ItemsSource)
-                    dataPoints.Add(item);
-
-            return dataPoints;
+            return null;
         }
 
         /// <summary>
@@ -114,52 +129,69 @@ namespace ChartTest
         /// <returns>Drawed Rectangle</returns>
         private IList<Rectangle> GenerateRectangle()
         {
-            // Garante que ItemsSource nunca será nulo ou vazio
-            //while (ItemsSource == null)
-            //    ItemsSource = GenerateData();
-
             IList<Rectangle> rectangleList = new List<Rectangle>();
+
             rectangleList.Clear();
 
-            Int32 countItemsSource = (ItemsSource as IList).Count;
-
-            Double widthComponent = GetActualWidthParentContent();
-
-            Double widthPosition = widthComponent / countItemsSource;
-
-            Double positionX = -widthComponent;
-
-            Double minimum = ItemsSource.Min();
-
-            foreach (var item in ItemsSource)
+            try
             {
-                Rectangle rect = new Rectangle();
+                if (ItemsSource != null)
+                {
+                    Int32 countItemsSource = (ItemsSource as IList).Count;
+                    Double widthComponent = GetActualWidthParentContent();
+                    Double widthPosition = widthComponent / (countItemsSource * 2);
+                    Double positionX = -widthComponent;
+                    IList<SolidColorBrush> colors = new List<SolidColorBrush>();
 
-                //rect.Height = item.DependentValue / (myGrid.Height / 50);
-                rect.Height = CalculateHeightOfRectangle(GetActualHeightParentControl(), item.DependentValue);
+                    colors.Clear();
 
-                rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
+                    Double countColors = itemsSource.Max() / 4;
 
-                rect.Fill = Colorize.GetSingleton().GenerateColor();
-                rect.ToolTip = item.IndependentValue + " (" + item.DependentValue + ") ";
+                    for (int i = 0; i < countColors; i++)
+                        colors.Add(Colorize.GetSingleton().GenerateColor());
 
-                // Configures Border/BorderColor of rectangle
-                rect.StrokeThickness = 1.5;
-                rect.Stroke = new SolidColorBrush(Colors.Black);
+                    foreach (var item in ItemsSource)
+                    {
+                        Rectangle rect = new Rectangle();
 
-                // Set location of component in screen
-                rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
+                        rect.Height = CalculateHeightOfRectangle(GetActualHeightParentControl(), item.DependentValue);
 
-                // position of component in grid
-                widthPosition += widthComponent / countItemsSource;
+                        rect.Width = CalculateWidthOfRectangle(countItemsSource, GetActualWidthParentContent());
 
-                // Sets Vertical Alignment of rectangle to bottom
-                rect.VerticalAlignment = VerticalAlignment.Bottom;
+                        if (item.DependentValue <= countColors)
+                            rect.Fill = colors[0];
+                        else if (item.DependentValue <= countColors * 2)
+                            rect.Fill = colors[1];
+                        else if (item.DependentValue <= countColors * 3)
+                            rect.Fill = colors[2];
+                        else
+                            rect.Fill = colors[3];
 
-                rectangleList.Add(rect);
+                        rect.ToolTip = item.IndependentValue + " (" + item.DependentValue + ") ";
+
+                        // Configures Border/BorderColor of rectangle
+                        rect.StrokeThickness = 1.5;
+                        rect.Stroke = new SolidColorBrush(Colors.Black);
+
+                        // Set location of component in screen
+                        rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
+
+                        // position of component in grid
+                        widthPosition += widthComponent / countItemsSource;
+
+                        // Sets Vertical Alignment of rectangle to bottom
+                        rect.VerticalAlignment = VerticalAlignment.Bottom;
+
+                        rectangleList.Add(rect);
+                    }
+                }
+                return rectangleList;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Não foi informado um data source!");
             }
 
-            return rectangleList;
         }
 
         /// <summary>
@@ -226,9 +258,7 @@ namespace ChartTest
             else
                 height = myGrid.Height;
 
-            Double multiplyier = height / ItemsSource.Max();
-
-            Double proportion = dependentValue * multiplyier;
+            Double proportion = dependentValue * (height / ItemsSource.Max());
 
             return (proportion) - (proportion / 10);
         }

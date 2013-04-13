@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Reflection;
-namespace ChartTest.Utils
+namespace ChartLibrary.Utils
 {
     public class Singleton<T> where T : class
     {

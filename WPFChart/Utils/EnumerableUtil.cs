@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChartTest.Utils
+namespace ChartLibrary.Utils
 {
     public static class EnumerableUtil
     {

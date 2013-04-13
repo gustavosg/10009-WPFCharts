@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 #endregion
 
-namespace ChartTest.Utils
+namespace ChartLibrary.Utils
 {
     public class Colorize : Singleton<Colorize>
     {
