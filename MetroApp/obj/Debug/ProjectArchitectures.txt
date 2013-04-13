@@ -1,0 +1,2 @@
+D:\Projetos\10009-WPFCharts\Library\MetroChart\MetroChart.csproj;neutral
+D:\Projetos\10009-WPFCharts\MetroApp\MetroApp.csproj;neutral

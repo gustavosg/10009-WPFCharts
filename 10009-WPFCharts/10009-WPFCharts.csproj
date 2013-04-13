@@ -94,7 +94,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WPFChart\WPFChart.csproj">
+    <ProjectReference Include="..\Library\WPFChart\WPFChart.csproj">
       <Project>{8462407c-a690-4718-aa59-b68cfd7d9e56}</Project>
       <Name>WPFChart</Name>
     </ProjectReference>

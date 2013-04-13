@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>GUSTAVO-PC</Machine>
+    <WindowsUser>Gustavo</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <RegisteredManifestChecksum>3E44E2C6FDBA5C4D9846AC33916B9E4EDC852F38B2DBE86324816534D115EE10</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>b4081a04-a4b3-4610-a87c-99ece2f403bb_1.0.0.0_neutral__jg5rmz0h9x2g0</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>b4081a04-a4b3-4610-a87c-99ece2f403bb_jg5rmz0h9x2g0!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>b4081a04-a4b3-4610-a87c-99ece2f403bb</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Gustavo</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-04-13T22:29:45.415</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\App2.exe">
+      <PackagePath>App2.exe</PackagePath>
+      <Modified>2013-04-13T22:29:44.775</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\App2.pdb">
+      <PackagePath>App2.pdb</PackagePath>
+      <Modified>2013-04-13T22:29:44.728</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\Library\MetroChart\bin\Debug\ClassLibrary1.pdb">
+      <PackagePath>ClassLibrary1.pdb</PackagePath>
+      <Modified>2013-04-13T22:29:29.085</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\Library\MetroChart\bin\Debug\ClassLibrary1.dll">
+      <PackagePath>ClassLibrary1.dll</PackagePath>
+      <Modified>2013-04-13T22:29:29.116</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\Assets\Logo.png">
+      <PackagePath>Assets\Logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-03-17T02:14:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\Assets\SmallLogo.png">
+      <PackagePath>Assets\SmallLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-03-17T02:14:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\Assets\SplashScreen.png">
+      <PackagePath>Assets\SplashScreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-03-17T02:14:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\Assets\StoreLogo.png">
+      <PackagePath>Assets\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-03-17T02:14:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\App.xaml">
+      <PackagePath>App.xaml</PackagePath>
+      <Modified>2013-04-13T20:17:57.422</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\Common\StandardStyles.xaml">
+      <PackagePath>Common\StandardStyles.xaml</PackagePath>
+      <Modified>2012-07-26T23:24:24.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\MainPage.xaml">
+      <PackagePath>MainPage.xaml</PackagePath>
+      <Modified>2013-04-13T20:54:13.467</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\Library\MetroChart\bin\Debug\ColumnChart.xaml">
+      <PackagePath>ClassLibrary1\ColumnChart.xaml</PackagePath>
+      <Modified>2013-04-13T19:38:14.617</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projetos\10009-WPFCharts\MetroApp\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2013-04-13T22:29:45.212</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <applicationRequestMinimum>
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+        <PermissionSet class="System.Security.PermissionSet" version="1" ID="Custom" SameSite="site" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- Opções do Manifesto do UAC
+            Se você quer mudar o nível do Controle de Conta do Usuário do Windows substitua o 
+            nó requestedExecutionLevel por uma das seguintes opções.
+
+        <requestedExecutionLevel  nível="asInvoker" uiAccess="falso" />
+        <requestedExecutionLevel  nível="requireAdministrator" uiAccess="falso" />
+        <requestedExecutionLevel  nível="highestAvailable" uiAccess="falso" />
+
+            Se você quer utilizar o Arquivo e o Virtualização do Registro para regredir
+            a compatibilidade então delete o nó requestedExecutionLevel.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</asmv1:assembly>
