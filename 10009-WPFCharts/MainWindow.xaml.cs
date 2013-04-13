@@ -49,6 +49,17 @@ namespace ChartTest
         {
             InitializeComponent();
 
+            IList<DataPoint> dataSource = new List<DataPoint>();
+
+            dataSource.Clear();
+
+            dataSource.Add(new DataPoint { IndependentValue = "Sapatos", DependentValue = 100 });
+            dataSource.Add(new DataPoint { IndependentValue = "Meias", DependentValue = 50 });
+            dataSource.Add(new DataPoint { IndependentValue = "Botas", DependentValue = 100 });
+            dataSource.Add(new DataPoint { IndependentValue = "Chinelos", DependentValue = 50 });
+
+            myChart.ItemsSource = dataSource;
+
             //ColumnChart chart = new ColumnChart();
 
             //foreach (var item in chart.AddRectanglesToGrid())

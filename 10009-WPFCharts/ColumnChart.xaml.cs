@@ -61,25 +61,28 @@ namespace ChartTest
         {
             IList<DataPoint> dataPoints = new List<DataPoint>();
 
-            Random num = new Random();
-            Int16 value = 0;
+            //Random rand = new Random();
+            //Int16 value = 0;
 
-            while (value < 1 && value > 3)
-                value = Convert.ToInt16(num.Next(8));
+            //while (value <= 3)
+            //    value = Convert.ToInt16(rand.Next(150));
 
-            for (int i = 1; i <= value; i++)
-            {
-                DataPoint pointItem = new DataPoint()
-                {
-                    IndependentValue = "Title " + i,
-                    DependentValue = i * 1,
-                    ToolTip = "Title " + i
-                };
-                dataPoints.Add(pointItem);
+            //for (int i = 1; i <= value; i++)
+            //{
+            //    DataPoint pointItem = new DataPoint()
+            //    {
+            //        IndependentValue = "Title " + i,
+            //        DependentValue = i * 1,
 
-            }
+            //    };
+            //    dataPoints.Add(pointItem);
+            //}
+
+            if (ItemsSource != null)
+                foreach (DataPoint item in ItemsSource)
+                    dataPoints.Add(item);
+
             return dataPoints;
-
         }
 
         /// <summary>
@@ -99,8 +102,6 @@ namespace ChartTest
             {
                 item.VerticalAlignment = VerticalAlignment.Bottom;
 
-                Canvas.SetRight(item, -50);
-
                 myGrid.Children.Add(item);
             }
 
@@ -114,8 +115,8 @@ namespace ChartTest
         private IList<Rectangle> GenerateRectangle()
         {
             // Garante que ItemsSource nunca será nulo ou vazio
-            while (ItemsSource == null)
-                ItemsSource = GenerateData();
+            //while (ItemsSource == null)
+            //    ItemsSource = GenerateData();
 
             IList<Rectangle> rectangleList = new List<Rectangle>();
             rectangleList.Clear();
@@ -149,8 +150,6 @@ namespace ChartTest
                 // Set location of component in screen
                 rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
 
-                //Canvas.SetLeft(rect, 50);
-
                 // position of component in grid
                 widthPosition += widthComponent / countItemsSource;
 
@@ -171,18 +170,10 @@ namespace ChartTest
         {
             if (myGrid.ActualWidth.Equals(double.NaN) || myGrid.ActualWidth.Equals(0.0) ||
                 (myGrid.Width.Equals(double.NaN) || myGrid.Width.Equals(0.0)))
-            {
-                Double width = 0.0;
-                //if (myGrid.Width.Equals(Double.NaN))
-                //    width = this.Width;
-                //else
-                //    width = myGrid.Width;
-                Double minWidth = 50;
-                width = myGrid.Width;
 
-                return width;
-            }
+                return myGrid.Width;
             else
+
                 return System.Windows.SystemParameters.PrimaryScreenWidth;
         }
 
@@ -214,13 +205,9 @@ namespace ChartTest
         /// <returns></returns>
         public Double CalculateWidthOfRectangle(Int32 countItemsSource, Double widthComponent)
         {
-            Double minWidth = 50.0;
-            Double width = 0.0;
-            width = widthComponent / countItemsSource - (widthComponent / 10);
-            if (width < minWidth)
-                return minWidth;
-            else
-                return width;
+            Double widthForComponent = (widthComponent / countItemsSource) / 2;
+
+            return widthForComponent - (widthForComponent * 0.10);
         }
 
         /// <summary>
