@@ -64,15 +64,15 @@ namespace ChartTest
             Random num = new Random();
             Int16 value = 0;
 
-            while (value < 2)
+            while (value < 1 && value > 3)
                 value = Convert.ToInt16(num.Next(8));
 
-            for (int i = 1; i <= value ; i++)
+            for (int i = 1; i <= value; i++)
             {
                 DataPoint pointItem = new DataPoint()
                 {
                     IndependentValue = "Title " + i,
-                    DependentValue = i * 100,
+                    DependentValue = i * 1,
                     ToolTip = "Title " + i
                 };
                 dataPoints.Add(pointItem);
@@ -99,8 +99,9 @@ namespace ChartTest
             {
                 item.VerticalAlignment = VerticalAlignment.Bottom;
 
+                Canvas.SetRight(item, -50);
+
                 myGrid.Children.Add(item);
-                //children.Add(item);
             }
 
             return children;
@@ -133,7 +134,6 @@ namespace ChartTest
             {
                 Rectangle rect = new Rectangle();
 
-                //rect.Height = item.DependentValue ;
                 //rect.Height = item.DependentValue / (myGrid.Height / 50);
                 rect.Height = CalculateHeightOfRectangle(GetActualHeightParentControl(), item.DependentValue);
 
@@ -142,14 +142,14 @@ namespace ChartTest
                 rect.Fill = Colorize.GetSingleton().GenerateColor();
                 rect.ToolTip = item.IndependentValue + " (" + item.DependentValue + ") ";
 
-                // Configures border/BorderColor of rectangle
+                // Configures Border/BorderColor of rectangle
                 rect.StrokeThickness = 1.5;
                 rect.Stroke = new SolidColorBrush(Colors.Black);
 
-                // this set location of component in screen
+                // Set location of component in screen
                 rect.Margin = new Thickness(widthPosition + positionX / 2, 0, 0, 0);
 
-                Canvas.SetLeft(rect, 50);
+                //Canvas.SetLeft(rect, 50);
 
                 // position of component in grid
                 widthPosition += widthComponent / countItemsSource;
@@ -169,15 +169,16 @@ namespace ChartTest
         /// <returns>Double Value</returns>
         public Double GetActualWidthParentContent()
         {
-            if (this.myGrid.ActualWidth == double.NaN || this.myGrid.ActualWidth == 0.0)
+            if (myGrid.ActualWidth.Equals(double.NaN) || myGrid.ActualWidth.Equals(0.0) ||
+                (myGrid.Width.Equals(double.NaN) || myGrid.Width.Equals(0.0)))
             {
                 Double width = 0.0;
                 //if (myGrid.Width.Equals(Double.NaN))
                 //    width = this.Width;
                 //else
                 //    width = myGrid.Width;
-
-                width = 150.0;
+                Double minWidth = 50;
+                width = myGrid.Width;
 
                 return width;
             }
@@ -238,9 +239,6 @@ namespace ChartTest
             else
                 height = myGrid.Height;
 
-            // ToDo Gustavo: Implementar lógica para controlar min/max de Height do component.
-
-            //  height / (((heightComponent / height) * dependentValue) * ((IList)ItemsSource).Count) 
             Double multiplyier = height / ItemsSource.Max();
 
             Double proportion = dependentValue * multiplyier;
